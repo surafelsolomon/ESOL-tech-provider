@@ -3,39 +3,26 @@
 import { useState, useEffect } from 'react';
 
 export default function ThemeSwitcher() {
-    const [theme, setTheme] = useState(() => {
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) return savedTheme;
+    const [theme, setTheme] = useState('light'); // Default theme
+    const [isMounted, setIsMounted] = useState(false);
 
-        // Get system theme preference
+    useEffect(() => {
+        setIsMounted(true);
+        const savedTheme = localStorage.getItem('theme');
         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
             ? 'dark'
             : 'light';
-        return systemTheme;
-    });
+        const initialTheme = savedTheme || systemTheme;
+        setTheme(initialTheme);
+    }, []);
 
-    // Update theme in localStorage and data attribute
     useEffect(() => {
+        if (!isMounted) return;
+
         document.documentElement.setAttribute('data-theme', theme);
-        if (!localStorage.getItem('theme')) {
-            window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? localStorage.setItem('theme', 'dark')
-                : localStorage.setItem('theme', 'light');
-        }
-    }, [theme]);
+        localStorage.setItem('theme', theme);
 
-    // Toggle theme and persist in localStorage
-    const toggleTheme = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-    };
-
-    // Watch for system preference changes when no user preference exists
-    useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
         const handleMediaChange = () => {
             if (!localStorage.getItem('theme')) {
                 setTheme(mediaQuery.matches ? 'dark' : 'light');
@@ -44,7 +31,14 @@ export default function ThemeSwitcher() {
 
         mediaQuery.addEventListener('change', handleMediaChange);
         return () => mediaQuery.removeEventListener('change', handleMediaChange);
-    }, []);
+    }, [theme, isMounted]);
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    };
+
+    if (!isMounted) return null;
 
     return (
         <button

@@ -464,7 +464,7 @@ header nav a {
 }
 
 .service-card:hover::before {
-  animation: shine 1.5s;
+  animation: shine 1.5s flex-start;
 }
 
 @keyframes shine {
