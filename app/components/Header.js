@@ -1,4 +1,3 @@
-// app/components/Header.js
 'use client';
 
 import Link from 'next/link';
@@ -13,13 +12,14 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
-        setIsAuthenticated(document.cookie.includes('auth_token'));
+        const authToken = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
+        setIsAuthenticated(!!authToken);
     }, [pathname]);
 
     const handleLogout = () => {
         document.cookie = 'auth_token=; path=/; max-age=0';
         setIsAuthenticated(false);
-        router.push('/');
+        router.push('/client/login');
         setIsMenuOpen(false);
     };
 
@@ -39,7 +39,6 @@ export default function Header() {
                         height={40}
                     />
                 </Link>
-
                 <button
                     className="menu-toggle"
                     onClick={toggleMenu}
@@ -60,36 +59,37 @@ export default function Header() {
                             height={40}
                         />
                     </Link>
-
-                    <Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link>
                     <Link href="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
                     <Link href="/industries" onClick={() => setIsMenuOpen(false)}>Industries</Link>
                     <Link href="/resources" onClick={() => setIsMenuOpen(false)}>Resources</Link>
                     <Link href="/contact-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
+                    <Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link>
                 </div>
 
                 <div className="auth-links">
                     {isAuthenticated ? (
-                        <button onClick={handleLogout} className="logout-button">
-                            Logout
-                        </button>
-                    ) : (
                         <>
-                            <Link
-                                href="/client/login"
-                                className="client-login"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Client Login
+                            <Link href="/client/profile" onClick={() => setIsMenuOpen(false)}>
+                                <Image
+                                    src="/images/user-avatar.png"
+                                    alt="User Profile"
+                                    width={32}
+                                    height={32}
+                                    className="user-avatar"
+                                />
                             </Link>
-                            <Link
-                                href="/admin/login"
-                                className="admin-login"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                Admin Login
-                            </Link>
+                            <button onClick={handleLogout} className="logout-button">
+                                Logout
+                            </button>
                         </>
+                    ) : (
+                        <Link
+                            href="/client/login"
+                            className="client-login"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Sign-in/Sign-up
+                        </Link>
                     )}
                 </div>
             </nav>

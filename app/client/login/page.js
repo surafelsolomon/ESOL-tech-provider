@@ -1,37 +1,43 @@
+// app/client/login/page.js
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import GoogleLoginButton from '../../components/GoogleLoginButton';
 
 export default function ClientLoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
     const handleEmailLogin = () => {
         // Add your email login logic here
         console.log('Email login:', email, password);
-        // For demonstration purposes, we'll redirect to the client dashboard
         router.push('/client/dashboard');
     };
 
-    const handleGoogleLogin = () => {
-        // Add your Google login logic here
-        console.log('Google login');
-        router.push('/client/dashboard');
-    };
+    const handleGoogleLogin = async () => {
+        try {
+            const response = await fetch('/api/auth/google', {
+                method: 'GET',
+                redirect: 'follow'
+            });
 
-    const handleAppleLogin = () => {
-        // Add your Apple login logic here
-        console.log('Apple login');
-        router.push('/client/dashboard');
+            if (!response.ok) {
+                throw new Error('Google login failed');
+            }
+
+            // The API route should handle the redirect to Google
+            window.location.href = response.url;
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     const handleSignup = () => {
-        // Add your signup logic here
-        console.log('Signup');
         router.push('/client/signup');
     };
 
@@ -87,20 +93,9 @@ export default function ClientLoginPage() {
                                 <span>or</span>
                             </div>
 
-                            <button
-                                onClick={handleGoogleLogin}
-                                className="social-button google"
-                            >
-                                <Image
-                                    src="/images/google-logo.svg"
-                                    alt="Google Login"
-                                    width={20}
-                                    height={20}
-                                />
-                                <span>Login with Google</span>
-                            </button>
+                            <GoogleLoginButton onClick={handleGoogleLogin} />
 
-                            <button
+                            {/* <button
                                 onClick={handleAppleLogin}
                                 className="social-button apple"
                             >
@@ -111,7 +106,7 @@ export default function ClientLoginPage() {
                                     height={20}
                                 />
                                 <span>Login with Apple</span>
-                            </button>
+                            </button> */}
                         </div>
 
                         <div className="additional-options">
@@ -127,6 +122,7 @@ export default function ClientLoginPage() {
                             </button>
                         </div>
                     </form>
+                    {error && <div className="error-message">{error}</div>}
                 </div>
             </motion.div>
         </div>
