@@ -88,7 +88,9 @@ export default function Header() {
                             className="client-login"
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            Sign-in/Sign-up
+                            <button>
+                                Sign-in/Sign-up
+                            </button>
                         </Link>
                     )}
                 </div>

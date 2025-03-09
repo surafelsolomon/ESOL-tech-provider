@@ -24,7 +24,6 @@
   }
 }
 
-/* Rest of existing CSS remains the same */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -36,17 +35,39 @@ body {
 header nav {
   display: flex;
   justify-content: space-around;
-  padding: 1rem;
   background-color: var(--secondary-color);
+  padding: 0%;
+  margin: 0%;
 }
 
 header nav a {
   color: var(--text-color);
   text-decoration: none;
+  font-size: smaller;
 }
-.firstchild {
-  margin-left: 0;
-  padding-left: 0;
+header nav a:hover,
+header nav a:active {
+  color: var(--background-color);
+  background-color: var(--text-color);
+  text-decoration: underline;
+  transition: background-color 0.9s;
+  transition: color 0.9s;
+  transition: text-decoration 0.9s;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+}
+button {
+  font-size: smaller;
+}
+button:hover,
+button:active {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: background-color 0.9s;
 }
 .parallax {
   background-image: url("/images/background.jpg");
@@ -151,7 +172,6 @@ header nav a {
   display: none;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   background-color: var(--secondary-color);
 }
 
@@ -209,7 +229,6 @@ header nav a {
   display: none;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   background-color: var(--secondary-color);
 }
 
