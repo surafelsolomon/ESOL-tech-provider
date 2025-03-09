@@ -32,11 +32,11 @@ export default function Header() {
             <div className="mobile-header">
                 <Link href="/" className="logo-link">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/logo.svg"
                         alt="Esol Tech Logo"
                         className="logo"
-                        width={120}
-                        height={40}
+                        width={32}
+                        height={32}
                     />
                 </Link>
                 <button
@@ -52,11 +52,11 @@ export default function Header() {
                 <div className="nav-main-links">
                     <Link href="/" className="desktop-logo">
                         <Image
-                            src="/images/logo.png"
+                            src="/images/logo.svg"
                             alt="Esol Tech Logo"
                             className="logo"
-                            width={120}
-                            height={40}
+                            width={32}
+                            height={32}
                         />
                     </Link>
                     <Link href="/services" onClick={() => setIsMenuOpen(false)}>Services</Link>
