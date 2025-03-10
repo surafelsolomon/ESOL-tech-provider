@@ -21,6 +21,7 @@ export default function Header() {
     const navItems = [
         {
             name: 'Services',
+            href: '/services',
             children: [
                 { name: 'ERP Solutions', href: '/services/erp-system' },
                 { name: '3D Virtualization', href: '/services/3d-virtualization' },
@@ -29,6 +30,7 @@ export default function Header() {
         },
         {
             name: 'Resources',
+            href: '/resources',
             children: [
                 { name: 'Blog', href: '/resources/blog' },
                 { name: 'Whitepapers', href: '/resources/whitepapers' },
@@ -99,12 +101,13 @@ export default function Header() {
                         >
                             {item.children ? (
                                 <>
-                                    <button
+                                    <Link
+                                        href={item.href}
                                         className="dropdown-toggle"
                                         onClick={() => handleDropdown(item.name)}
                                     >
                                         {item.name}
-                                    </button>
+                                    </Link>
                                     {openDropdown === item.name && (
                                         <div className="dropdown-menu">
                                             {item.children.map((child) => (

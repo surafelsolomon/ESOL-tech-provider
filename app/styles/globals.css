@@ -1786,7 +1786,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .dropdown-menu a:hover {
   background-color: var(--secondary-color);
 }
-
+.dropdown-toggle::after {
+  content: " ▼";
+  font-size: 0.8em;
+}
 /* Mobile Dropdowns */
 @media (max-width: 768px) {
   .nav-item-container {
@@ -1808,7 +1811,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
   }
 
   .dropdown-toggle::after {
-    content: " ▼";
     font-size: 0.8em;
   }
 }
