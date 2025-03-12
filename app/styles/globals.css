@@ -1975,7 +1975,7 @@ main {
 .learn-more {
   display: inline-block;
   margin-top: 1rem;
-  color: var(--primary-color);
+  color: var(--text-color);
   text-decoration: none;
   font-weight: 600;
 }
@@ -2158,5 +2158,201 @@ main {
     width: 90%;
     text-align: center;
     font-size: 0.9rem;
+  }
+}
+
+/* Calendar Styling */
+.custom-calendar {
+  width: 100%;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--background-color);
+}
+
+.react-datepicker__header {
+  background: var(--secondary-color) !important;
+  border: none !important;
+  border-radius: 12px 12px 0 0;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: var(--text-color) !important;
+  width: 2.5rem;
+  line-height: 2.5rem;
+  margin: 0.1rem;
+}
+
+.react-datepicker__day--selected {
+  background: var(--primary-color) !important;
+  color: white !important;
+  border-radius: 8px;
+}
+
+.react-datepicker__day--outside-month {
+  color: var(--text-muted) !important;
+}
+
+.react-datepicker__current-month {
+  color: var(--text-color);
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+}
+
+.react-datepicker__navigation {
+  top: 1rem;
+}
+
+/* Time Picker Styling */
+.time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.time-picker-title {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.time-slot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+  background: var(--secondary-color);
+}
+
+.time-slot.selected {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .scheduler-container {
+    grid-template-columns: 1fr;
+  }
+
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    width: 2rem;
+    line-height: 2rem;
+  }
+
+  .time-slots {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .time-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .react-datepicker__day-name,
+  .react-datepicker__day {
+    width: 1.8rem;
+    line-height: 1.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Pricing Page Styles */
+.pricing-page {
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pricing-hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--primary-color), #0066cc);
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  color: white;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 2rem 0;
+}
+
+.pricing-card {
+  background: var(--background-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pricing-card.popular {
+  border-color: var(--primary-color);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 118, 255, 0.2);
+}
+
+.payment-section {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.payment-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.payment-method {
+  background: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 15px;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+}
+
+.payment-icon {
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pricing-hero {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-method {
+    width: 60px;
+    height: 60px;
   }
 }

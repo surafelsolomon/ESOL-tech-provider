@@ -40,6 +40,7 @@ export default function Header() {
         },
         { name: 'Industries', href: '/industries' },
         { name: 'Contact Us', href: '/contact-us' },
+        { name: 'Pricing', href: '/pricing' }, // Add new navigation item
         { name: 'About Us', href: '/about-us' }
     ];
 
