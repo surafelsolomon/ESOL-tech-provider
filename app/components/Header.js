@@ -68,6 +68,7 @@ export default function Header() {
                 { name: 'Webinars', href: '/resources/webinars' }
             ]
         },
+        { name: "Pricing", href: '/pricing' },
         { name: 'Contact Us', href: '/contact-us' },
         { name: 'About Us', href: '/about-us' }
     ];
