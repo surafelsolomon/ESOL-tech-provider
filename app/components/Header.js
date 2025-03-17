@@ -1,9 +1,8 @@
-// app/components/Header.js
 'use client';
 
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 export default function Header() {
@@ -12,14 +11,44 @@ export default function Header() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [user, setUser] = useState(null);
+    const profileRef = useRef(null);
 
     useEffect(() => {
-        const authToken = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
-        setIsAuthenticated(!!authToken);
+        const checkAuth = () => {
+            console.log('Checking authentication status');
+            const authToken = document.cookie.split('; ').find(row => row.startsWith('auth_token='));
+            if (authToken) {
+                console.log('User is authenticated');
+                setIsAuthenticated(true);
+
+                // Retrieve user information from cookies
+                const cookies = document.cookie.split('; ');
+                const userNameCookie = cookies.find(cookie => cookie.startsWith('user_name='));
+                const userPictureCookie = cookies.find(cookie => cookie.startsWith('user_picture='));
+
+                if (userNameCookie && userPictureCookie) {
+                    const userName = decodeURIComponent(userNameCookie.split('=')[1]);
+                    const userPicture = decodeURIComponent(userPictureCookie.split('=')[1]);
+                    console.log('Retrieved user information:', { userName, userPicture });
+                    setUser({
+                        name: userName,
+                        picture: userPicture
+                    });
+                } else {
+                    console.log('User information cookies not found');
+                }
+            } else {
+                console.log('User is not authenticated');
+                setIsAuthenticated(false);
+                setUser(null);
+            }
+        };
+
+        checkAuth();
     }, [pathname]);
 
     const navItems = [
-
         {
             name: 'Services',
             href: '/services',
@@ -44,8 +73,13 @@ export default function Header() {
     ];
 
     const handleLogout = () => {
-        document.cookie = 'auth_token=; path=/; max-age=0';
+        // Clear authentication cookies
+        document.cookie = 'auth_token=; Path=/; Max-Age=0';
+        document.cookie = 'user_name=; Path=/; Max-Age=0';
+        document.cookie = 'user_picture=; Path=/; Max-Age=0';
+
         setIsAuthenticated(false);
+        setUser(null);
         router.push('/client/login');
         setIsMenuOpen(false);
     };
@@ -58,6 +92,26 @@ export default function Header() {
     const handleDropdown = (itemName) => {
         setOpenDropdown(openDropdown === itemName ? null : itemName);
     };
+
+    const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+
+    const toggleProfileDropdown = () => {
+        setIsProfileDropdownOpen(!isProfileDropdownOpen);
+    };
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (profileRef.current && !profileRef.current.contains(event.target)) {
+                setIsProfileDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
         <header className="header">
@@ -139,20 +193,27 @@ export default function Header() {
 
                 <div className="auth-links">
                     {isAuthenticated ? (
-                        <>
-                            <Link href="/client/profile" onClick={() => setIsMenuOpen(false)}>
-                                <Image
-                                    src="/images/user-avatar.png"
-                                    alt="User Profile"
-                                    width={32}
-                                    height={32}
-                                    className="user-avatar"
-                                />
-                            </Link>
-                            <button onClick={handleLogout} className="logout-button">
-                                Logout
-                            </button>
-                        </>
+                        <div className="user-profile" ref={profileRef}>
+                            {user && (
+                                <div className="user-info" onClick={toggleProfileDropdown}>
+                                    <Image
+                                        src={user.picture}
+                                        alt="User Profile"
+                                        width={32}
+                                        height={32}
+                                        className="user-avatar"
+                                    />
+                                </div>
+                            )}
+
+                            {isProfileDropdownOpen && (
+                                <div className="profile-dropdown">
+                                    <Link href="/client/cost">Cost</Link>
+                                    <Link href="/client/account">Account</Link>
+                                    <button onClick={handleLogout}>Logout</button>
+                                </div>
+                            )}
+                        </div>
                     ) : (
                         <button>
                             <Link

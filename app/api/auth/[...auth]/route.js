@@ -29,12 +29,32 @@ export async function GET(request) {
             return NextResponse.redirect(`${baseUrl}/client/login?error=auth_failed`);
         }
 
+        // Extract user information from the Google response
+        const userResponse = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo`, {
+            headers: {
+                Authorization: `Bearer ${tokens.access_token}`
+            }
+        });
+
+        const userInfo = await userResponse.json();
+
         const response = NextResponse.redirect(`${baseUrl}/client/dashboard`);
         response.cookies.set('auth_token', tokens.id_token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: tokens.expires_in,
             path: '/',
+        });
+
+        // Store user information in cookies
+        response.cookies.set('user_name', userInfo.name, {
+            path: '/',
+            maxAge: tokens.expires_in
+        });
+
+        response.cookies.set('user_picture', userInfo.picture, {
+            path: '/',
+            maxAge: tokens.expires_in
         });
 
         return response;
