@@ -72,13 +72,13 @@ export default function Header() {
                         height={32}
                     />
                 </Link>
-                <button
+                <p
                     className="menu-toggle"
                     onClick={toggleMenu}
                     aria-label="Toggle navigation menu"
                 >
                     {isMenuOpen ? '×' : '☰'}
-                </button>
+                </p>
             </div>
 
             <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
@@ -155,13 +155,16 @@ export default function Header() {
                             </button>
                         </>
                     ) : (
-                        <Link
-                            href="/client/login"
-                            className="client-login"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            <button>Login</button>
-                        </Link>
+                        <button>
+                            <Link
+                                href="/client/login"
+                                className="client-login"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Login
+                            </Link>
+                        </button>
+
                     )}
                 </div>
             </nav>

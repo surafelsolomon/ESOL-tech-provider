@@ -1,6 +1,7 @@
 'use client';
-
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
 
 export default function ThemeSwitcher() {
     const [theme, setTheme] = useState('light'); // Default theme
@@ -45,17 +46,22 @@ export default function ThemeSwitcher() {
             onClick={toggleTheme}
             style={{
                 position: 'fixed',
-                bottom: '1rem',
-                right: '1rem',
+                bottom: '0rem',
+                right: '0rem',
                 padding: '0.5rem 1rem',
-                backgroundColor: 'var(--primary-color)',
+                backgroundColor: 'transparent',
                 color: 'var(--text-color)',
                 border: 'none',
                 borderRadius: '4px',
                 cursor: 'pointer'
             }}
         >
-            Switch to {theme === 'light' ? 'Dark' : 'Light'} Theme
+            {theme === 'light' ? <Image
+                src="/images/moon.png"
+                alt="moon"
+                width={30}
+                height={30}
+            /> : 'sun'}
         </button>
     );
 }

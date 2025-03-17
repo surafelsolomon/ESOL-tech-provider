@@ -1,0 +1,81 @@
+.pricing-page {
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.pricing-hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--primary-color), #0066cc);
+  border-radius: 20px;
+  margin-bottom: 4rem;
+  color: white;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 2rem 0;
+}
+
+.pricing-card {
+  background: var(--background-color);
+  border: 2px solid var(--secondary-color);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pricing-card.popular {
+  border-color: var(--primary-color);
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 118, 255, 0.2);
+}
+
+.payment-section {
+  margin-top: 6rem;
+  text-align: center;
+}
+
+.payment-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.payment-method {
+  background: var(--secondary-color);
+  padding: 1.5rem;
+  border-radius: 15px;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+}
+
+.payment-icon {
+  font-size: 2.5rem;
+  color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pricing-hero {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-method {
+    width: 60px;
+    height: 60px;
+  }
+}

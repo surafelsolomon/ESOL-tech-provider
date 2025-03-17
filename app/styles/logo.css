@@ -1,0 +1,23 @@
+.logo {
+  max-width: 120px;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    max-width: 90px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .logo {
+    max-width: 100px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .logo {
+    max-width: 120px;
+  }
+}
