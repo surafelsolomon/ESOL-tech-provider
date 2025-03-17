@@ -2,14 +2,8 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import PricingCard from '../components/PricingCard';
-import {
-    FaCreditCard,
-    FaPaypal,
-    FaEthereum,
-    FaGoogleWallet,
-    FaCcVisa,
-    FaCcMastercard
-} from 'react-icons/fa';
+import { FaCreditCard, FaPaypal, FaEthereum, FaGoogleWallet, FaCcVisa, FaCcMastercard } from 'react-icons/fa';
+import { generatePerformanceData, servicesList } from '@/utils/demoData';
 
 const PricingPage = () => {
     const ref = useRef(null);
@@ -18,7 +12,7 @@ const PricingPage = () => {
     // ERP Pricing Data
     const erpPlans = [
         {
-            plan: "Cloud Standard",
+            plan: "Cloud Starter",
             price: "6,000 ETB",
             duration: "month",
             features: [
@@ -28,15 +22,55 @@ const PricingPage = () => {
                 "Basic Support",
                 "Financial Module"
             ],
-            popular: false
+            popular: false,
+            newPlan: false
         },
-        // Add more ERP plans...
+        {
+            plan: "Cloud Pro",
+            price: "12,000 ETB",
+            duration: "month",
+            features: [
+                "5 Modules Included",
+                "Up to 20 Users",
+                "Multi-Company",
+                "Priority Support",
+                "All Core Modules"
+            ],
+            popular: true,
+            newPlan: true
+        },
+        {
+            plan: "Cloud Enterprise",
+            price: "24,000 ETB",
+            duration: "month",
+            features: [
+                "All Modules Included",
+                "Unlimited Users",
+                "Multi-Company",
+                "Dedicated Support",
+                "Custom Development"
+            ],
+            popular: false,
+            newPlan: false
+        }
     ];
 
     // 3D Virtualization Pricing Data
     const virtualizationPlans = [
         {
-            plan: "Professional Tier",
+            plan: "3D Basic",
+            price: "9,999 ETB",
+            features: [
+                "1-5 Active Spaces",
+                "Basic Analytics",
+                "Standard Watermarks",
+                "Email Support"
+            ],
+            popular: false,
+            newPlan: false
+        },
+        {
+            plan: "3D Professional",
             price: "19,999 ETB",
             features: [
                 "5-20 Active Spaces",
@@ -45,9 +79,22 @@ const PricingPage = () => {
                 "Custom Watermarks",
                 "Priority Support"
             ],
-            popular: true
+            popular: true,
+            newPlan: true
         },
-        // Add more 3D plans...
+        {
+            plan: "3D Enterprise",
+            price: "39,999 ETB",
+            features: [
+                "Unlimited Spaces",
+                "VR/AR Support",
+                "AI Integration",
+                "Dedicated Account Manager",
+                "Custom Development"
+            ],
+            popular: false,
+            newPlan: false
+        }
     ];
 
     // Animation configurations
@@ -64,7 +111,7 @@ const PricingPage = () => {
                 animate={{ opacity: 1 }}
                 className="pricing-hero"
             >
-                <h1>Flexible Pricing Plans</h1>
+                <h1>Modern Pricing Plans</h1>
                 <p>Choose the perfect solution for your business needs</p>
             </motion.section>
 
