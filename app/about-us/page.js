@@ -1,10 +1,12 @@
 // app/about-us/page.js
+'use client';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 export default function AboutUs() {
     return (
         <div className="about-us">
-            {/* Section 1 - Hero */}
+            {/* Hero Section */}
             <section className="hero">
                 <div className="hero-content">
                     <h1>About Esol Tech Provider</h1>
@@ -13,7 +15,7 @@ export default function AboutUs() {
                 <div className="hero-image">
                     <Image
                         src="/images/about-us/hero-image.jpg"
-                        alt="Esol Tech Team"
+                        alt="Esol Tech Provider"
                         width={800}
                         height={400}
                         className="responsive-image"
@@ -21,49 +23,38 @@ export default function AboutUs() {
                 </div>
             </section>
 
-            {/* Section 2 - Our Mission */}
+            {/* Mission Section */}
             <section className="mission">
                 <div className="container">
                     <h2>Our Mission</h2>
                     <p>
-                        At Esol Tech Provider, we're committed to delivering innovative technological solutions that empower businesses to thrive in the digital age. Our mission is to help organizations leverage technology to achieve their goals while maintaining security, efficiency, and scalability.
+                        At Esol Tech Provider, we&apos;re committed to delivering innovative technological solutions that empower businesses to thrive in the digital age. Our mission is to help organizations leverage technology to achieve their goals while maintaining security, efficiency, and scalability.
                     </p>
                 </div>
             </section>
 
-            {/* Section 3 - Our Team */}
-            <section className="team">
+            {/* Features Section */}
+            <section className="features">
                 <div className="container">
-                    <h2>Our Team</h2>
-                    <div className="team-members">
-                        <div className="team-member">
-                            <Image
-                                src="/images/about-us/team-member1.jpg"
-                                alt="Team Member 1"
-                                width={200}
-                                height={200}
-                                className="team-photo"
-                            />
-                            <h3>John Doe</h3>
-                            <p>CEO & Founder</p>
+                    <h2>What Makes Us Different</h2>
+                    <div className="features-grid">
+                        <div className="feature-card">
+                            <h3>Innovative Solutions</h3>
+                            <p>We develop cutting-edge technology solutions tailored to your specific needs.</p>
                         </div>
-                        <div className="team-member">
-                            <Image
-                                src="/images/about-us/team-member2.jpg"
-                                alt="Team Member 2"
-                                width={200}
-                                height={200}
-                                className="team-photo"
-                            />
-                            <h3>Jane Smith</h3>
-                            <p>CTO</p>
+                        <div className="feature-card">
+                            <h3>Expertise & Experience</h3>
+                            <p>Our team brings decades of combined experience in technology and business solutions.</p>
                         </div>
-                        {/* Add more team members as needed */}
+                        <div className="feature-card">
+                            <h3>Customer-Centric Approach</h3>
+                            <p>We prioritize your success and build long-term partnerships with our clients.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Section 4 - History */}
+            {/* History Section */}
             <section className="history">
                 <div className="container">
                     <h2>Our Journey</h2>
@@ -82,7 +73,6 @@ export default function AboutUs() {
                                 <p>Opened new offices in three continents and doubled our team size.</p>
                             </div>
                         </div>
-                        {/* Add more timeline events as needed */}
                     </div>
                 </div>
             </section>
